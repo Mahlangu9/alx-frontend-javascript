@@ -37,3 +37,18 @@ function displayObject(id: string, obj: Object): void {
 displayObject('Teacher', teacher3);
 displayObject('Director', director1);
 
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName.charAt(0)}. ${lastName}`;
+};
+
+console.log(printTeacher("John", "Doe"));
+
+// Optional browser output
+const result = document.createElement('p');
+result.textContent = printTeacher("John", "Doe");
+document.body.appendChild(result);
+
