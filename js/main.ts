@@ -4,7 +4,11 @@ interface Teacher {
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-  [key: string]: any; // for extra attributes like 'contract'
+  [key: string]: any;
+}
+
+interface Directors extends Teacher {
+  numberOfReports: number;
 }
 
 const teacher3: Teacher = {
@@ -15,16 +19,21 @@ const teacher3: Teacher = {
   contract: false,
 };
 
-console.log(teacher3);
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  fullTimeEmployee: true,
+  location: 'London',
+  numberOfReports: 17,
+};
 
-// 👇 This will actually show it on the browser
-document.body.innerHTML = `
-  <h1>Teacher Info</h1>
-  <ul>
-    <li><strong>First Name:</strong> ${teacher3.firstName}</li>
-    <li><strong>Last Name:</strong> ${teacher3.lastName}</li>
-    <li><strong>Full Time:</strong> ${teacher3.fullTimeEmployee}</li>
-    <li><strong>Location:</strong> ${teacher3.location}</li>
-    <li><strong>Contract:</strong> ${teacher3.contract}</li>
-  </ul>
-`;
+function displayObject(id: string, obj: Object): void {
+  const container = document.createElement('pre');
+  container.id = id;
+  container.textContent = `${id}:\n` + JSON.stringify(obj, null, 2);
+  document.body.appendChild(container);
+}
+
+displayObject('Teacher', teacher3);
+displayObject('Director', director1);
+
